@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Ionic
-        uses: coturiv/setyo-ionic@v1.0.4
+        uses: coturiv/setup-ionic@v1.0.4
         with:
           ionic-version: 7.2.0
       - name: Execute build
