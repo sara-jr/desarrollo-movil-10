@@ -1,6 +1,6 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonLabel, IonButton } from '@ionic/react';
 
-const addRoute: React.FC = () => {
+const AddRoute: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -27,4 +27,4 @@ const addRoute: React.FC = () => {
   );
 };
 
-export default addRoute;
+export default AddRoute;

@@ -33,6 +33,7 @@ import '@ionic/react/css/palettes/dark.system.css';
 /* Theme variables */
 import './theme/variables.css';
 import Login from './pages/Login';
+import AddRoute from './pages/AddRoute';
 import { AuthProvider, PrivateRoute } from './providers/AuthProvider';
 
 setupIonicReact();
@@ -42,6 +43,8 @@ const App: React.FC = () => (
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
+          <PrivateRoute exact path="/routes/add" component={AddRoute}>
+          </PrivateRoute>
           <PrivateRoute exact path="/home" component={Home}>
           </PrivateRoute>
           <Route exact path="/">
