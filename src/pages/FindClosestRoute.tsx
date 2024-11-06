@@ -6,7 +6,7 @@ import useGeolocation from '../hooks/useGeolocation'; // Usamos el hook para geo
 import { haversineDistance } from '../utils/haversine';
 // No es necesario importar GeolocationCoordinates, ya que no existe en Capacitor
 
-const HomePage: React.FC = () => {
+const FindClosestRoute: React.FC = () => {
   const { location, error } = useGeolocation(); // Usamos el hook de geolocalización
   const [loading, setLoading] = useState<boolean>(false);
   const [showAlert, setShowAlert] = useState<boolean>(false);
@@ -112,4 +112,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+export default FindClosestRoute;

@@ -36,6 +36,7 @@ import Login from './pages/Login';
 import AddRoute from './pages/AddRoute';
 import { AuthProvider, PrivateRoute } from './providers/AuthProvider';
 import Info from './pages/Info';
+import FindClosestRoute from './pages/Prueba';
 
 setupIonicReact();
 
@@ -44,6 +45,8 @@ const App: React.FC = () => (
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
+          <PrivateRoute exact path="/route/closest" component={FindClosestRoute}>
+          </PrivateRoute>
           <PrivateRoute exact path="/route/:id" component={Info}>
           </PrivateRoute>
           <PrivateRoute exact path="/routes/add" component={AddRoute}>
