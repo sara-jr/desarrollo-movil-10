@@ -6,4 +6,9 @@ const config: CapacitorConfig = {
   webDir: 'dist'
 };
 
-export default config;
+export default {
+  appId: 'com.example.app',
+  appName: 'TuApp',
+  webDir: 'build', // Esta debe ser la carpeta donde se generan tus activos de producción
+  bundledWebRuntime: false
+};
