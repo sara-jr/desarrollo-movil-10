@@ -1,5 +1,5 @@
 import { useIonAlert } from '@ionic/react';
-import { Permission, Role } from 'appwrite';
+import { Permission, Query, Role } from 'appwrite';
 import { useContext } from 'react';
 import { database } from '../config/appwrite';
 import { AuthContext } from '../providers/AuthProvider';
@@ -31,6 +31,15 @@ export const useRouteData = ()=>{
     }
     catch(e){
       showAlert(`Error fetching the routes: ${e}` )
+      return []
+    }
+  }
+  const searchRoutesByName = async (name: string): Promise<any[]> =>{
+    try{
+      return (await database.listDocuments(DB_ID, ROUTES_COLLECTION_ID, [Query.contains('name', name)])).documents
+    }
+    catch(e){
+      showAlert(`No results`)
       return []
     }
   }
@@ -77,7 +86,8 @@ export const useRouteData = ()=>{
     getRouteById,
     createRoute,
     updateRouteById,
-    deleteRouteById
+    deleteRouteById,
+    searchRoutesByName
   }
 }
 

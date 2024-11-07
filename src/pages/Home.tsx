@@ -32,7 +32,7 @@ const Home: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot='start'>
-            <IonButton id='search-btn' size='large'>
+            <IonButton id='search-btn' size='large' routerLink='/routes/search'>
               <IonIcon slot='icon-only' icon={searchOutline}></IonIcon>
             </IonButton>
           </IonButtons>
