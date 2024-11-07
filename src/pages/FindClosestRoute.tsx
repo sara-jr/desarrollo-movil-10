@@ -1,6 +1,6 @@
 // src/pages/HomePage.tsx
 import React, { useState, useEffect } from 'react';
-import { IonContent, IonPage, IonButton, useIonLoading, useIonAlert } from '@ionic/react';
+import { IonContent, IonTitle, IonPage, IonButton, useIonLoading, useIonAlert, IonList, IonItem, IonToolbar, IonButtons, IonBackButton, IonLabel, IonHeader, IonCard, IonCardContent } from '@ionic/react';
 import { useRouteData } from '../hooks/routeData';
 import { useGeolocation } from '../hooks/useGeolocation';
 import { haversineDistance } from '../utils/haversine';
@@ -64,24 +64,39 @@ const FindClosestRoute: React.FC = () => {
 
   return (
     <IonPage>
+      <IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start">
+              <IonBackButton></IonBackButton>
+            </IonButtons>
+            <IonTitle>Buscar la ruta más cercana</IonTitle>
+          </IonToolbar>
+      </IonHeader>
       <IonContent>
-        <div style={{ padding: '16px' }}>
-          <h2>Bienvenido a la aplicación de transporte público</h2>
-          <IonButton expand="full" onClick={handleLocationRequest} disabled={currentLocation === null}>
-            Obtener ubicación y rutas cercanas
-          </IonButton>
+        <IonCard>
+          <IonCardContent>
+            <IonButton expand="block" onClick={handleLocationRequest} disabled={currentLocation === null}>
+              Buscar rutas cercanas
+            </IonButton>
 
-          {/* Si la ubicación fue encontrada, mostramos la ruta más cercana */}
-          {closestRoute ? (
-            <div>
-              <h3>Ruta más cercana:</h3>
-              <p><strong>{closestRoute.name}</strong></p>
-              <p>Distancia: {haversineDistance(currentLocation.latitude, currentLocation.longitude, closestRoute.latitudes[0], closestRoute.longitudes[0]).toFixed(2)} km</p>
-            </div>
-          ) : (
-            <p>Aún no hemos encontrado una ruta cercana</p>
-          )}
-        </div>
+            {/* Si la ubicación fue encontrada, mostramos la ruta más cercana */}
+            {closestRoute ? (
+              <IonList>
+                <IonItem>
+                  <IonLabel>Ruta más cercana:</IonLabel>
+                </IonItem>
+                <IonItem routerLink={`/route/${closestRoute.$id}`}>
+                  <IonLabel>{closestRoute.name}</IonLabel>
+                </IonItem>
+                <IonItem>
+                  <p>Distancia: {haversineDistance(currentLocation.latitude, currentLocation.longitude, closestRoute.latitudes[0], closestRoute.longitudes[0]).toFixed(2)} km</p>
+                </IonItem>
+              </IonList>
+            ) : (
+              <IonLabel>Presiona el boton para encontrar la ruta</IonLabel>
+            )}
+          </IonCardContent>
+        </IonCard>
       </IonContent>
     </IonPage>
   );
