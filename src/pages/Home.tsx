@@ -45,7 +45,7 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        { isAdmin && <IonToast color='warning' message='Está en modo administrador' duration={3000} isOpen={true} position='top'></IonToast>}
+        { isAdmin && <IonToast color='warning' message='Está en modo administrador' duration={1500} isOpen={true} position='top'></IonToast>}
         <IonGrid>
           <IonRow>
             <IonCol size='12' class='ion-align-items-center ion-justify-content-center'>
@@ -60,7 +60,7 @@ const Home: React.FC = () => {
             isAdmin &&
             <IonRow>
               <IonCol size='12' class='ion-align-items-center ion-justify-content-center'>
-                <IonButton color='warning' expand='block'>
+                <IonButton color='warning' expand='block' routerLink='/routes/add'>
                   <IonIcon icon={addOutline} slot='start'>
                   </IonIcon>
                   Crear ruta

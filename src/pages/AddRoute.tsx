@@ -1,11 +1,13 @@
-import { IonContent, IonRange, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonLabel, IonButton, IonIcon, IonGrid, IonRow, IonCol, IonDatetime } from '@ionic/react';
+import { IonContent, IonRange, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonLabel, IonButton, IonIcon, IonGrid, IonRow, IonCol, IonDatetime, IonButtons, IonBackButton } from '@ionic/react';
 import { addOutline } from 'ionicons/icons';
 import { useState } from 'react';
 import { useRouteData} from '../hooks/routeData';
 import { useForm } from 'react-hook-form';
 import { useIonLoading, useIonAlert } from '@ionic/react';
+import { useIonRouter } from '@ionic/react';
 
 const AddRoute: React.FC = () => {
+  const navigator = useIonRouter()
   const [present, dismiss] = useIonLoading();
   const [presentAlert, dismissAlert] = useIonAlert()
   const [pointsInputs, setPointsInputs] = useState([{name:'point1'}]);
@@ -19,8 +21,14 @@ const AddRoute: React.FC = () => {
   const submitNewRoute = async ()=>{
     const data = getValues()
     await present()
-    await createRoute(data.name, data.starts_at, data.ends_at, data.price, data.longitudes, data.latitudes);
+    const newRoute = await createRoute(data.name, data.starts_at, data.ends_at, data.price, data.longitudes, data.latitudes);
     dismiss()
+    if(newRoute){
+      navigator.push(`/route/${newRoute?.$id}`, 'back')
+    }
+    else{
+      navigator.push('/', 'back')
+    }
   }
   const displayError = (error: any)=>{
     presentAlert(`Error: ${error}`)
@@ -29,6 +37,9 @@ const AddRoute: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
+          <IonButtons slot='start'>
+            <IonBackButton></IonBackButton>
+          </IonButtons>
           <IonTitle>Crear Nueva Ruta</IonTitle>
         </IonToolbar>
       </IonHeader>
