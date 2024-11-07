@@ -1,7 +1,6 @@
 import { IonBadge, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonInputPasswordToggle, IonLabel, IonPage, IonRow, IonTitle, IonToolbar, useIonAlert,
   useIonLoading,
   useIonRouter, } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
 import './Login.css';
 import { Icon } from 'ionicons/dist/types/components/icon/icon';
 import { notificationsOutline, searchOutline, locationOutline, addOutline } from 'ionicons/icons';

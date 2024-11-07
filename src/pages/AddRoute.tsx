@@ -11,7 +11,7 @@ const AddRoute: React.FC = () => {
   const [pointsInputs, setPointsInputs] = useState([{name:'point1'}]);
   const {handleSubmit, register, getValues, setValue} = useForm();
   const count = pointsInputs.length
-  const extractDateFromEvent = (ev)=>ev.detail.value?.split('T')[1] ?? '';
+  const extractDateFromEvent = (ev:any)=>ev.detail.value?.split('T')[1] ?? '';
   const addPointInput = ()=>{
     setPointsInputs([...pointsInputs, {name:`point${count}`}])
   }

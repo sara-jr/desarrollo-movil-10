@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { IonContent, IonPage, IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonTabs, IonTabBar, IonTabButton, IonLabel, IonTab, IonItem, IonText, IonSpinner, IonGrid, IonCol, IonRow, IonCard, IonCardHeader, IonCardContent } from '@ionic/react';
+import { IonContent, IonPage, IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonTabs, IonTabBar, IonTabButton, IonLabel, IonTab, IonItem, IonText, IonSpinner, IonGrid, IonCol, IonRow, IonCard, IonCardHeader, IonCardContent, IonButton, IonList } from '@ionic/react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, Polygon } from 'react-leaflet';
 import { LatLngExpression } from 'leaflet';
 import { useRouteData } from '../hooks/routeData';
-import { useIonAlert, useIonLoading } from '@ionic/react';
+import { useIonAlert, useIonLoading, useIonRouter } from '@ionic/react';
 import { useParams } from 'react-router';
 import 'leaflet/dist/leaflet.css';
+import { useContext } from 'react';
+import { AuthContext } from '../providers/AuthProvider';
   
 const Info: React.FC = () => {
-    const {getRouteById} = useRouteData()
+  const { authUser } = useContext(AuthContext);
+  const isAdmin = authUser.labels.includes('admin')
+  const navigator = useIonRouter()
+    const {getRouteById, deleteRouteById} = useRouteData()
     const [route, setRoute] = useState(null as any)
     const [presentAlert] = useIonAlert();
     const {id} = useParams<{id:string}>();
@@ -28,6 +33,18 @@ const Info: React.FC = () => {
           <IonSpinner style={{width:'200px', height:'200px'}}></IonSpinner>
         </IonContent>
       ) 
+    }
+    const handleRouteDeletion = ()=>{
+      presentAlert('¿Seguro que deseas eliminar la ruta?', [
+        {
+          text:'Sí', 
+          htmlAttributes:{color:'danger'}, 
+          handler: ()=>{
+            deleteRouteById(route.$id).then(()=>navigator.push('/', 'back'))
+          }
+        },
+        { text:'No' }
+      ])
     }
     const initialPosition: LatLngExpression = [route.latitudes[0], route.longitudes[0]]; 
     const markers = route.latitudes.map((value: any, index: number)=>({lat:value, lng:route.longitudes[index], title:`Parada ${index}`}))
@@ -69,9 +86,20 @@ const Info: React.FC = () => {
               </MapContainer>
             </IonTab>
             <IonTab tab="general">
-              <IonItem>
-                <IonText>{}</IonText>
-              </IonItem>
+              <IonList>
+                <IonItem>
+                  <IonLabel key='name'>Nombre: {route.name}</IonLabel>
+                </IonItem>
+                <IonItem>
+                  <IonLabel key='stops'>Número de paradas: {route.latitudes.length}</IonLabel>
+                </IonItem>
+                {
+                  isAdmin &&
+                  <IonItem>
+                    <IonButton key='delete' color='danger' expand='block' onClick={handleRouteDeletion}>Eliminar Ruta</IonButton> 
+                  </IonItem>
+                }
+              </IonList>
             </IonTab>
             <IonTab tab="pricing">
               <IonItem>

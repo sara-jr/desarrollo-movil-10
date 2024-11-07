@@ -1,5 +1,4 @@
 import { IonBadge, IonButton, IonButtons, IonChip, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToast, IonToolbar, useIonRouter } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
 import './Home.css';
 import { Icon } from 'ionicons/dist/types/components/icon/icon';
 import { notificationsOutline, searchOutline, locationOutline, addOutline, logOutOutline, logOut, warningOutline } from 'ionicons/icons';
