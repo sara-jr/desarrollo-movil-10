@@ -1,9 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
-const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+export const config: CapacitorConfig = {
+  appId: 'io.ionic.autobuses',
   appName: 'app-autobuses',
-  webDir: 'dist'
+  webDir: 'dist',
+  bundledWebRuntime: false
 };
-
-export default config;

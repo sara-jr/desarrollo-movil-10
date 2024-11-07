@@ -50,7 +50,7 @@ const Home: React.FC = () => {
         <IonGrid>
           <IonRow>
             <IonCol size='12' class='ion-align-items-center ion-justify-content-center'>
-              <IonButton expand='block'>
+              <IonButton expand='block' routerLink='/closestroute'>
                 <IonIcon icon={locationOutline} slot='start'>
                 </IonIcon>
                 Buscar rutas cercanas a mí
