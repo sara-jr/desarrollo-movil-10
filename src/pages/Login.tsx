@@ -63,8 +63,8 @@ const Login: React.FC = () => {
   return (
     <IonPage>
       <IonContent>
-        <IonCard>
-          <IonCardHeader>Iniciar sesión</IonCardHeader>
+        <IonCard className='fondo'>
+          <IonTitle>Iniciar sesión</IonTitle>
           <IonCardContent>
             <form onSubmit={handleSubmit(signIn)}>
               <IonInput required fill='outline' label='Correo electronico' labelPlacement='stacked' type='email' {...register('email', {required: true})}></IonInput>
@@ -73,9 +73,13 @@ const Login: React.FC = () => {
                 <IonInputPasswordToggle slot='end'></IonInputPasswordToggle>
               </IonInput>
               <br />
-              <IonButton expand='full' type='submit'>
+              <IonButton className='buton' expand='full' type='submit'>
                 Iniciar sesión
               </IonButton>
+              <br/>              
+              <IonButton expand="full" type="button" color="secondary">
+		Crear una cuenta
+	      </IonButton>
             </form>
           </IonCardContent>
         </IonCard>
